@@ -1,5 +1,5 @@
 <h1><?= $this->translate('Update Proposals');?> </h1>
-<?= $this->partial('activity/activity/list.phtml', [
+<?= $this->partial('activity/admin/list.phtml', [
     'activities' => $updatedActivities,
     'proposals' => $updateProposals,
     'admin' => true,
@@ -9,7 +9,7 @@
 
 <h1><?php echo $this->translate('Unapproved Activities');?> </h1>
 <?php
-echo $this->partial('activity/activity/list.phtml', [
+echo $this->partial('activity/admin/list.phtml', [
     'activities' => $unapprovedActivities,
     'admin' => true,
     'moreLink' => $moreUnapprovedActivities ? $this->url('admin_activity/queue_unapproved', ['page' => 1]) : null,
@@ -18,7 +18,7 @@ echo $this->partial('activity/activity/list.phtml', [
 
 <h1><?php echo $this->translate('Approved Activities')?></h1>
 <?php
-echo $this->partial('activity/activity/list.phtml', [
+echo $this->partial('activity/admin/list.phtml', [
     'activities' => $approvedActivities,
     'admin' => true,
     'moreLink' => $moreApprovedActivities ? $this->url('admin_activity/queue_approved', ['page' => 1]) : null,
