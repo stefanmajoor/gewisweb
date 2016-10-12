@@ -16,11 +16,19 @@ class AdminController extends AbstractActionController
      */
     public function queueAction()
     {
-        $perPage = 5;
+        $perPage = 50;
         $queryService = $this->getServiceLocator()->get('activity_service_activityQuery');
-        $unapprovedActivities = $queryService->getUnapprovedActivities();
-        $approvedActivities = $queryService->getApprovedActivities();
-        $disapprovedActivities = $queryService->getDisapprovedActivities();
+        $activityService = $this->getServiceLocator()->get('activity_service_activity');
+
+        $map = function ($activityList) use ($activityService) {
+            return array_map(function ($activity) use ($activityService) {
+                return $activityService->getAdminDetails($activity);
+            }, $activityList);
+        };
+
+        $approvedActivities = $map($queryService->getApprovedActivities());
+        $unapprovedActivities = $map($queryService->getUnapprovedActivities());
+        $disapprovedActivities = $map($queryService->getDisapprovedActivities());
         $updatedActivities = [];
         $updateProposals = [];
         foreach ($queryService->getAllProposals() as $updateProposal) {

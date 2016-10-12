@@ -22,16 +22,16 @@
         <tbody>
         <?php foreach($activities as $activity):?>
         <tr>
-            <td><?= $activity->getId()?></td>
-            <td><?= $activity->getName() ?></td>
-            <td><?= $activity->getNameEn() ?></td>
-            <td><?= $activity->getBeginTime()->format('Y-m-d H:i:s') ?></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><?= $activity['id'] ?></td>
+            <td><?= $activity['dutch_name'] ?></td>
+            <td><?= $activity['english_name'] ?></td>
+            <td><?= $activity['begin_time']->format('Y-m-d H:i:s') ?></td>
+            <td><?= $activity['subscriptions'] ?></td>
+            <td><?= $activity['organ'] ?></td>
+            <td><?= $activity['creator']?></td>
             <td></td>
             <td><td>
-            <td></td>
+            <td><a href="<?php echo $this->url('admin_activity/view', ['id' => $activity['id']]);?>">Edit</a></td>
         </tr>
         <?php endforeach;?>
         </tbody>

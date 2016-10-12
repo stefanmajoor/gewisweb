@@ -430,6 +430,26 @@ class Activity extends AbstractAclService implements ServiceManagerAwareInterfac
 
 
     /**
+     * Get the details for an activity for display in the admin list
+     *
+     * @param ActivityModel $activity
+     * @return array
+     */
+    public function getAdminDetails(ActivityModel $activity)
+    {
+        return [
+            'id' => $activity->getId(),
+            'dutch_name' => $activity->getName(),
+            'english_name' => $activity->getNameEn(),
+            'begin_time' => $activity->getBeginTime(),
+            'subscriptions' => count($activity->getSignUps()),
+            'organ' => '',
+            'creator' => $activity->getCreator()->getMember()->getFullName(),
+        ];
+    }
+
+
+    /**
      * Get the activity mapper.
      *
      * @return \Activity\Mapper\Activity
