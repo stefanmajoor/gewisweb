@@ -437,13 +437,14 @@ class Activity extends AbstractAclService implements ServiceManagerAwareInterfac
      */
     public function getAdminDetails(ActivityModel $activity)
     {
+        $organ = $activity->getOrgan();
         return [
             'id' => $activity->getId(),
             'dutch_name' => $activity->getName(),
             'english_name' => $activity->getNameEn(),
             'begin_time' => $activity->getBeginTime(),
             'subscriptions' => count($activity->getSignUps()),
-            'organ' => '',
+            'organ' => is_null($organ) ? '-' : $organ->getName(),
             'creator' => $activity->getCreator()->getMember()->getFullName(),
         ];
     }
